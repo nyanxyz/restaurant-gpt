@@ -13,4 +13,4 @@ def get_review(post):
         your summary could be '깔끔하고 정갈한 분위기에서 식사하기 좋은 곳이라는 후기입니다.'
         """
 
-    return get_gpt_response(system_prompt, post, max_tokens=128)
+    return get_gpt_response(system_prompt, post, max_tokens=128, stream=True)

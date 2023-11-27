@@ -6,8 +6,8 @@ client = OpenAI(
 )
 
 
-def get_gpt_response(system_prompt, query, max_tokens=64):
-    chat_completion = client.chat.completions.create(
+def get_gpt_response(system_prompt, query, max_tokens=64, stream=False):
+    result = client.chat.completions.create(
         messages=[
             {
                 "role": "system",
@@ -21,6 +21,10 @@ def get_gpt_response(system_prompt, query, max_tokens=64):
         model="gpt-3.5-turbo",
         temperature=0,
         max_tokens=max_tokens,
+        stream=stream,
     )
 
-    return chat_completion.choices[0].message.content
+    if stream:
+        return result
+
+    return result.choices[0].message.content

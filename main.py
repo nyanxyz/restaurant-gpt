@@ -46,13 +46,16 @@ def find_reviews(restaurant, location):
 
         content = f'"""{blog_post}"""'
 
-        review = get_review(content)
-        if review.startswith("'") or review.startswith('"'):
-            review = review[1:]
-        if review.endswith("'") or review.endswith('"'):
-            review = review[:-1]
+        stream = get_review(content)
+        # if review.startswith("'") or review.startswith('"'):
+        #     review = review[1:]
+        # if review.endswith("'") or review.endswith('"'):
+        #     review = review[:-1]
 
-        print(f"{idx + 1}. {review}")
+        print(f"{idx + 1}. ", end="")
+        for part in stream:
+            print(part.choices[0].delta.content or "", end="")
+        print()
         print(f"   출처: {item['link']}")
 
 
