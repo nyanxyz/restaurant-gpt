@@ -36,7 +36,7 @@ def classify_intent(query):
 
 def get_intent_json(query):
     while True:
-        intent_json_str = classify_intent(query) # 무한루프일 가능성이 높아서 fallback 처리가 더 나을듯
+        intent_json_str = classify_intent(query)  # 무한루프일 가능성이 높아서 fallback 처리가 더 나을듯
 
         try:
             data = json.loads(intent_json_str)

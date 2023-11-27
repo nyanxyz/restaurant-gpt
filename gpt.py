@@ -16,11 +16,11 @@ def get_gpt_response(system_prompt, query, max_tokens=64):
             {
                 "role": "user",
                 "content": query,
-            }
+            },
         ],
         model="gpt-3.5-turbo",
         temperature=0,
-        max_tokens=max_tokens
+        max_tokens=max_tokens,
     )
 
     return chat_completion.choices[0].message.content
