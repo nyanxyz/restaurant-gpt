@@ -1,4 +1,6 @@
-from gpt import get_gpt_response
+from services.gpt import GPTManager
+
+gpt_manager = GPTManager()
 
 
 def get_review(post):
@@ -13,4 +15,4 @@ def get_review(post):
         your summary could be '깔끔하고 정갈한 분위기에서 식사하기 좋은 곳이라는 후기입니다.'
         """
 
-    return get_gpt_response(system_prompt, post, max_tokens=128, stream=True)
+    return gpt_manager.generate(system_prompt, post, max_tokens=128, stream=True)

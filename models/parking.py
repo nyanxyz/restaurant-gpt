@@ -1,5 +1,7 @@
-from gpt import get_gpt_response
+from services.gpt import GPTManager
 import json
+
+gpt_manager = GPTManager()
 
 
 def get_parking_info(post):
@@ -17,7 +19,7 @@ def get_parking_info(post):
         }
         """
 
-    return get_gpt_response(system_prompt, post, max_tokens=128)
+    return gpt_manager.generate(system_prompt, post, max_tokens=128)
 
 
 def get_parking_info_json(post):

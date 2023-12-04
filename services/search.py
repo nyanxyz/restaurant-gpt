@@ -25,7 +25,7 @@ def local_search(query):
         response_body = response.read()
         return json.loads(response_body.decode("utf-8"))
     else:
-        f"Error: {status} 에러가 발생했습니다. (local_search)"
+        raise f"Error: {status} 에러가 발생했습니다. (local_search)"
 
 
 def blog_search(query):
@@ -43,4 +43,4 @@ def blog_search(query):
         response_body = response.read()
         return json.loads(response_body.decode("utf-8"))
     else:
-        f"Error: {status} 에러가 발생했습니다. (blog_search)"
+        raise f"Error: {status} 에러가 발생했습니다. (blog_search)"

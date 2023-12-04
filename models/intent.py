@@ -1,5 +1,7 @@
-from gpt import get_gpt_response
+from services.gpt import GPTManager
 import json
+
+gpt_manager = GPTManager()
 
 
 def classify_intent(query):
@@ -20,6 +22,8 @@ def classify_intent(query):
         - The user wants to know about parking information of a specific restaurant. (ex: 브레드 앤 브루어스 주차장)
         - VALUE: RESTAURANT > name of the restaurant (ex: 브레드 앤 브루어스)
         - VALUE: LOCATION > location of the restaurant (ex: 강남)
+    - INTENT_TYPE: NONE
+        - 
 
     Provide output in JSON format as follows:
 
@@ -31,17 +35,16 @@ def classify_intent(query):
     }
     """
 
-    return get_gpt_response(system_prompt, query)
+    return gpt_manager.generate(system_prompt, query)
 
 
 def get_intent_json(query):
-    while True:
-        intent_json_str = classify_intent(query)  # 무한루프일 가능성이 높아서 fallback 처리가 더 나을듯
+    intent_json_str = classify_intent(query)  # 무한루프일 가능성이 높아서 fallback 처리가 더 나을듯
 
-        try:
-            data = json.loads(intent_json_str)
-        except json.JSONDecodeError:
-            print("Error: 문자열이 올바른 JSON 형식이 아닙니다. (get_intent_json)")
-            continue
-        else:
-            return data
+    try:
+        data = json.loads(intent_json_str)
+    except json.JSONDecodeError:
+        print("Error: 문자열이 올바른 JSON 형식이 아닙니다. (get_intent_json)")
+        exit()
+    else:
+        return data
